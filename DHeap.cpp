@@ -7,8 +7,8 @@
 
 //constructor
 template <class T>
-DHeap<T>::DHeap(int capacity):
-    current_size(0), table(T{}, -1, 2*capacity)
+DHeap<T>::DHeap(unsigned d, int capacity):
+    D(d), current_size(0), table(T{}, -1, 2*capacity)
 {
     if(capacity<=0) capacity=10; //make sure capacity is positive
     array.reserve(capacity);

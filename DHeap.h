@@ -13,7 +13,7 @@ class DHeap
 {
     public:
         //constructor
-        explicit DHeap(int capacity = 10);
+        explicit DHeap(unsigned d, int capacity = 10);
                 
         //returns the number of items in the heap
         unsigned size() const;
@@ -52,10 +52,11 @@ class DHeap
     private:
         //MEMBER VARIABLES
         
+        const unsigned D;
+        
         int current_size; //signed int that tracks array.size()
         std::vector<T> array; //holds items
         HashTable<T, int> table; //tracks the index of every item in the heap
-        
         
         //PERCOLATE FUNCTIONS
         //index percolates as far up or down as possible (past equivalent items)

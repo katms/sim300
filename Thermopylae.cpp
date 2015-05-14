@@ -7,6 +7,8 @@
 #include <iostream> //cout
 using std::cout;
 
+const unsigned D=2;
+
 
 //static variables
 DHeap<Soldier>::Test Thermopylae::persian = [] (const Soldier& s) { return !s.is_spartan(); };
@@ -14,7 +16,7 @@ DHeap<Soldier>::Test Thermopylae::spartan = [] (const Soldier& s) { return s.is_
 
 //constructor
 Thermopylae::Thermopylae(const unsigned nspartans, const unsigned npersians):
-    SPARTANS(nspartans), PERSIANS(npersians), heap(SPARTANS+PERSIANS), ticks(0), winner(UNDECIDED), survivors(0)
+    SPARTANS(nspartans), PERSIANS(npersians), heap(D, SPARTANS+PERSIANS), ticks(0), winner(UNDECIDED), survivors(0)
 {}
 
 //simulate battle once
