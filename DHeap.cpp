@@ -1,7 +1,7 @@
 //Katherine Sullivan
 //CSCI 335 Heap Assignment
 
-#include "BinaryHeap.h"
+#include "DHeap.h"
 #include "HashTable.cpp"
 #include <cstdlib> //rand
 

@@ -2,7 +2,7 @@
 //CSCI 335 Heap Assignment
 
 #include "Thermopylae.h"
-#include "BinaryHeap.cpp"
+#include "DHeap.cpp"
 #include <cstdlib> //rand
 #include <iostream> //cout
 using std::cout;

@@ -4,7 +4,7 @@
 #ifndef THERMOPYLAE_H
 #define THERMOPYLAE_H
 #include "Soldier.h"
-#include "BinaryHeap.h"
+#include "DHeap.h"
 #include <set> //set
 
 //simulates the Battle of Thermopylae
