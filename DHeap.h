@@ -1,19 +1,19 @@
 //Katherine Sullivan
 //CSCI 335 Heap Assignment
 
-#ifndef BINARYHEAP_H
-#define BINARYHEAP_H
+#ifndef DHEAP_H
+#define DHEAP_H
 
 #include <vector> //std::vector
 #include <functional> //std::function
 #include "HashTable.h"
 
 template <class T>
-class BinaryHeap
+class DHeap
 {
     public:
         //constructor
-        explicit BinaryHeap(int capacity = 10);
+        explicit DHeap(int capacity = 10);
                 
         //returns the number of items in the heap
         unsigned size() const;
@@ -77,4 +77,4 @@ class BinaryHeap
         int smaller_child(int parent) const;
 };
 
-#endif // BINARYHEAP_H
+#endif // DHEAP_H

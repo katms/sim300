@@ -9,8 +9,8 @@ using std::cout;
 
 
 //static variables
-BinaryHeap<Soldier>::Test Thermopylae::persian = [] (const Soldier& s) { return !s.is_spartan(); };
-BinaryHeap<Soldier>::Test Thermopylae::spartan = [] (const Soldier& s) { return s.is_spartan(); };
+DHeap<Soldier>::Test Thermopylae::persian = [] (const Soldier& s) { return !s.is_spartan(); };
+DHeap<Soldier>::Test Thermopylae::spartan = [] (const Soldier& s) { return s.is_spartan(); };
 
 //constructor
 Thermopylae::Thermopylae(const unsigned nspartans, const unsigned npersians):

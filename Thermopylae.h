@@ -33,15 +33,15 @@ class Thermopylae
     private:
         const unsigned SPARTANS;
         const unsigned PERSIANS;
-        BinaryHeap<Soldier> heap;
+        DHeap<Soldier> heap;
         
         std::set<unsigned> spartan_army; //set of unique ids of every Spartan in battle
                                          //used to find every Spartan in the heap (for when one dies)
         unsigned ticks;
         
         //tests for finding enemy soldiers
-        static BinaryHeap<Soldier>::Test persian;
-        static BinaryHeap<Soldier>::Test spartan;
+        static DHeap<Soldier>::Test persian;
+        static DHeap<Soldier>::Test spartan;
         
         //post-simulation stats
         victor winner;

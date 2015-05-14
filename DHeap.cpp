@@ -7,7 +7,7 @@
 
 //constructor
 template <class T>
-BinaryHeap<T>::BinaryHeap(int capacity):
+DHeap<T>::DHeap(int capacity):
     current_size(0), table(T{}, -1, 2*capacity)
 {
     if(capacity<=0) capacity=10; //make sure capacity is positive
@@ -16,21 +16,21 @@ BinaryHeap<T>::BinaryHeap(int capacity):
 
 //returns the number of items in the heap
 template<class T>
-unsigned BinaryHeap<T>::size() const
+unsigned DHeap<T>::size() const
 {
     return array.size();
 }
 
 //returns true if heap is empty
 template<class T>
-bool BinaryHeap<T>::empty() const
+bool DHeap<T>::empty() const
 {
     return array.empty();
 }
 
 //inserts item into heap
 template <class T>
-void BinaryHeap<T>::insert(const T& item)
+void DHeap<T>::insert(const T& item)
 {
     if(table.contains(item)) //duplicate, do nothing
     {
@@ -52,7 +52,7 @@ void BinaryHeap<T>::insert(const T& item)
 
 //removes minimum from heap and returns it
 template <class T>
-T BinaryHeap<T>::delete_min()
+T DHeap<T>::delete_min()
 {
     if(array.empty())
     {
@@ -86,7 +86,7 @@ T BinaryHeap<T>::delete_min()
 
 
 template <class T>
-void BinaryHeap<T>::decreaseKey(const T& item, const int change)
+void DHeap<T>::decreaseKey(const T& item, const int change)
 {
     int index=index_of(item); //find item
     if(index<0)
@@ -101,7 +101,7 @@ void BinaryHeap<T>::decreaseKey(const T& item, const int change)
 }
 
 template <class T>
-void BinaryHeap<T>::increaseKey(const T& item, const int change)
+void DHeap<T>::increaseKey(const T& item, const int change)
 {
     int index=index_of(item); //find item
     if(index<0)
@@ -117,7 +117,7 @@ void BinaryHeap<T>::increaseKey(const T& item, const int change)
 
 //remove item by percolating it up to the top and calling delete_min()
 template <class T>
-void BinaryHeap<T>::remove(const T& item)
+void DHeap<T>::remove(const T& item)
 {
     int index=index_of(item);
     if(index<0) //item not in heap
@@ -148,7 +148,7 @@ void BinaryHeap<T>::remove(const T& item)
 
 //make heap empty
 template <class T>
-void BinaryHeap<T>::clear()
+void DHeap<T>::clear()
 {
     table.clear(); //update table
     array.clear();
@@ -158,7 +158,7 @@ void BinaryHeap<T>::clear()
 //shortcut to call T-=(change) on every item in the heap
 //since every item decreases by the same constant amount, no need to re-arrange the heap after calling it on each item
 template <class T>
-void BinaryHeap<T>::decrease_all(const int change)
+void DHeap<T>::decrease_all(const int change)
 {
     for(unsigned i=0; i<array.size(); ++i)
     {
@@ -169,7 +169,7 @@ void BinaryHeap<T>::decrease_all(const int change)
 //returns a randomly selected object in the heap that satisfies test
 //returns nullptr if no qualifying item
 template <class T>
-T* BinaryHeap<T>::get_random(Test& test)
+T* DHeap<T>::get_random(Test& test)
 {
     if(array.empty())
     {
@@ -200,7 +200,7 @@ T* BinaryHeap<T>::get_random(Test& test)
 //repeatedly swap array[hole] with its parent as long as parent > array[hole]
 //if item are equivalent, keeps going
 template <class T>
-void BinaryHeap<T>::percolateUp(int hole) //assume hole is valid index
+void DHeap<T>::percolateUp(int hole) //assume hole is valid index
 {
     for(int parent=parent_of(hole); parent>-1 && array[hole] <= array[parent]; hole=parent, parent=parent_of(parent))
     {
@@ -213,7 +213,7 @@ void BinaryHeap<T>::percolateUp(int hole) //assume hole is valid index
 //repeatedly swap array[hole] with its smaller child as long as array[hole] is larger
 //if item are equivalent, keeps going
 template <class T>
-void BinaryHeap<T>::percolateDown(int hole) //assume hole is valid index
+void DHeap<T>::percolateDown(int hole) //assume hole is valid index
 {
     for(int child=smaller_child(hole); child>-1 && array[child] <= array[hole]; hole=child, child=smaller_child(child))
     {
@@ -232,7 +232,7 @@ void BinaryHeap<T>::percolateDown(int hole) //assume hole is valid index
 //if it's a left child, parent=(i-1)/2
 //else parent=(i-2)/2
 template <class T>
-int BinaryHeap<T>::parent_of(const int child_index) const
+int DHeap<T>::parent_of(const int child_index) const
 {
     if(child_index>0 && child_index<current_size)
     {
@@ -253,7 +253,7 @@ int BinaryHeap<T>::parent_of(const int child_index) const
 
 //left child of p = 2*p+1
 template <class T>
-int BinaryHeap<T>::left_child(int parent) const
+int DHeap<T>::left_child(int parent) const
 {
     int result = 2*parent + 1;
     if(result<current_size)
@@ -265,7 +265,7 @@ int BinaryHeap<T>::left_child(int parent) const
 
 //right child of p = 2*p+2
 template <class T>
-int BinaryHeap<T>::right_child(int parent) const
+int DHeap<T>::right_child(int parent) const
 {
     int result=2*parent + 2;
     if(result<current_size)
@@ -277,7 +277,7 @@ int BinaryHeap<T>::right_child(int parent) const
 
 //given parent returns the index of its smaller child
 template <class T>
-int BinaryHeap<T>::smaller_child(int parent) const
+int DHeap<T>::smaller_child(int parent) const
 {
     int left = left_child(parent);
     int right = right_child(parent);
@@ -291,7 +291,7 @@ int BinaryHeap<T>::smaller_child(int parent) const
 //uses table to find the index of item
 //returns default value (-1) if item is not in table, and therefore not in the heap
 template <class T>
-int BinaryHeap<T>::index_of(const T& item) const
+int DHeap<T>::index_of(const T& item) const
 {
     return table.get_value(item);
 }
