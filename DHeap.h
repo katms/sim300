@@ -72,10 +72,8 @@ class DHeap
         int index_of(const T& item) const;
         
         int parent_of(const int child_index) const;
-        int left_child(int parent) const;
-        int right_child(int parent) const;
         
-        int smaller_child(int parent) const;
+        int smallest_child(int parent) const;
 };
 
 #endif // DHEAP_H

@@ -215,7 +215,7 @@ void DHeap<T>::percolateUp(int hole) //assume hole is valid index
 template <class T>
 void DHeap<T>::percolateDown(int hole) //assume hole is valid index
 {
-    for(int child=smaller_child(hole); child>-1 && array[child] <= array[hole]; hole=child, child=smaller_child(child))
+    for(int child=smallest_child(hole); child>-1 && array[child] <= array[hole]; hole=child, child=smallest_child(child))
     {
         std::swap(array[hole], array[child]);
         table.set_value(array[child], child);
@@ -227,65 +227,47 @@ void DHeap<T>::percolateDown(int hole) //assume hole is valid index
 //INDEXING FUNCTIONS
 //in each case, returns -1 if not found
 
-//returns the parent of child_index
-//if child_index is the root or not in the heap, returns -1
-//if it's a left child, parent=(i-1)/2
-//else parent=(i-2)/2
+
 template <class T>
 int DHeap<T>::parent_of(const int child_index) const
 {
-    if(child_index>0 && child_index<current_size)
+    if(child_index<=0)
     {
-        int result;
-        if(0==child_index%2)//right child
+        return -1;
+    }
+    else if(child_index%D==0) //rightmost child
+    {
+        return child_index/D - 1;
+    }
+    else
+    {
+        return child_index/D;
+    }
+}
+
+//given parent returns the index of its smallest child
+template <class T>
+int DHeap<T>::smallest_child(int parent) const
+{
+    const unsigned limit=array.size();
+    const unsigned first=parent*D + 1;
+    
+    if(first>limit) //parent has no children
+    {
+        return -1;
+    }
+    unsigned smallest=first;
+    for(unsigned child_index=first; 
+                                //last child is first+D-1
+        child_index < limit && child_index < first+D; 
+        ++child_index)
         {
-            result=child_index-2;
+            if(array[child_index] < array[smallest])
+            {
+                smallest=child_index;
+            }
         }
-        
-        else //left child
-        {
-            result=child_index-1;
-        }
-        return result/2;
-    }
-    else return -1;
-}
-
-//left child of p = 2*p+1
-template <class T>
-int DHeap<T>::left_child(int parent) const
-{
-    int result = 2*parent + 1;
-    if(result<current_size)
-    {
-        return result;
-    }
-    else return -1;
-}
-
-//right child of p = 2*p+2
-template <class T>
-int DHeap<T>::right_child(int parent) const
-{
-    int result=2*parent + 2;
-    if(result<current_size)
-    {
-        return result;
-    }
-    else return -1;
-}
-
-//given parent returns the index of its smaller child
-template <class T>
-int DHeap<T>::smaller_child(int parent) const
-{
-    int left = left_child(parent);
-    int right = right_child(parent);
-    if(right<0 || left<0) //1 or 0 children, do not access or compare items
-    {
-        return left; //left is either -1 or the only child
-    }
-    else return (array[left] < array[right]) ? left : right;
+    return smallest;
 }
 
 //uses table to find the index of item
